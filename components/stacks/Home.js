@@ -15,7 +15,7 @@ const Home = () => {
             <View >
                 <Categories/>
             </View>
-            <View>
+            <View style=  {{flex:1}}>
                 <Text>Popular Concerts</Text>
                 <Card/>
             </View>

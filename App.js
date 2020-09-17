@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {SafeAreaView,StyleSheet,ScrollView,View,Text,StatusBar,} from 'react-native';
+import {SafeAreaView,StyleSheet,StatusBar,} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -11,6 +11,7 @@ import HomeStack from './components/stacks/Home'
 import TicketStack from './components/stacks/TicketStack'
 import ProfileStack from './components/stacks/ProfileStack'
 import NotificationStack from './components/stacks/NotificationStack'
+import AuthStack from './components/AuthStack'
 
 
 const tabs = createBottomTabNavigator()
@@ -61,10 +62,10 @@ const profilestack = ()=>{
 const App= () =>  {
   return (
     <>
-      <StatusBar backgroundColor='white' barStyle='dark-content' />
+      <StatusBar backgroundColor='blueviolet' barStyle='invert' />
       <SafeAreaView style={{flex:1}} >
-        <View style={styles.main} >
-          <NavigationContainer>
+        <AuthStack/>
+          {/* <NavigationContainer>
             <tabs.Navigator
               tabBarOptions={{
                 activeTintColor: '#1A4A99',
@@ -110,8 +111,7 @@ const App= () =>  {
                 }}
               />
             </tabs.Navigator>
-          </NavigationContainer>
-        </View>
+          </NavigationContainer> */}
       </SafeAreaView>
 
     </>

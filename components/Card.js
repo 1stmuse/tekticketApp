@@ -18,10 +18,9 @@ const Card = () => {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
         justifyContent:'flex-end',
-        height: height/4
+        height: height/4,
     },
     cardTxt:{
         fontSize:25,
