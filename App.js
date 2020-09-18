@@ -1,108 +1,127 @@
-
-
+import 'react-native-gesture-handler';
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {SafeAreaView,StyleSheet,StatusBar,} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import Entypo from 'react-native-vector-icons/Entypo'
+import HomeStack from './components/stacks/Home'
+import TicketStack from './components/stacks/TicketStack'
+import ProfileStack from './components/stacks/ProfileStack'
+import NotificationStack from './components/stacks/NotificationStack'
+import AuthStack from './components/AuthStack'
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
+const tabs = createBottomTabNavigator()
+const stack = createStackNavigator()
+
+const options = {
+  headerShown:false
+}
+
+const homestack = ()=>{
+  return(
+    <stack.Navigator>
+      <stack.Screen name='home' component={HomeStack}
+       options={{...options}}
+      />
+    </stack.Navigator>
+  )
+}
+
+const ticketstack = ()=>{
+  return(
+    <stack.Navigator>
+      <stack.Screen name='ticket' component={TicketStack}  
+        options={{...options}}
+      />
+    </stack.Navigator>
+  )
+}
+const notistack = ()=>{
+  return(
+    <stack.Navigator>
+      <stack.Screen name='notification' component={NotificationStack} 
+        options={{...options}} 
+      />
+    </stack.Navigator>
+  )
+}
+const profilestack = ()=>{
+  return(
+    <stack.Navigator>
+      <stack.Screen name='profile' component={ProfileStack} 
+        options={{...options}} 
+      />
+    </stack.Navigator>
+  )
+}
+
+const App= () =>  {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
+      <StatusBar backgroundColor='blueviolet' barStyle='invert' />
+      <SafeAreaView style={{flex:1}} >
+        <AuthStack/>
+          {/* <NavigationContainer>
+            <tabs.Navigator
+              tabBarOptions={{
+                activeTintColor: '#1A4A99',
+                inactiveTintColor: 'grey',
+                tabStyle:{backgroundColor:'transparent'},
+                style:{height:60, paddingVertical:5, elevation:0, backgroundColor:'none'},
+                labelStyle:{
+                  fontSize:18,
+                  fontWeight:'bold'
+                }
+              }}
+            >
+              <tabs.Screen name='homeTab' children={homestack}
+                options={{
+                  tabBarLabel:'Home',
+                  tabBarIcon:({color, size})=>(
+                    <Ionicons name='md-home' size={30} color={color}/> 
+                  ),
+                }}
+              />
+              <tabs.Screen name='ticketTab' children={ticketstack}
+                options={{
+                  tabBarLabel:'ticket',
+                  tabBarIcon:({color, size})=>(
+                    <Entypo name='ticket' size={30} color={color}/> 
+                  )
+                }}
+              />
+              <tabs.Screen name='notificationTab' children={notistack}
+                options={{
+                  tabBarLabel:'Notification',
+                  tabBarIcon:({color, size})=>(
+                    <MaterialIcons name='notifications-none' size={30} color={color}/> 
+                  )
+                }}
+              />
+              <tabs.Screen name='profileTab' children={profilestack}
+                options={{
+                  tabBarLabel:'Profile',
+                  tabBarIcon:({color, size})=>(
+                    <Entypo name='user' size={30} color={color}/> 
+                  ),
+                }}
+              />
+            </tabs.Navigator>
+          </NavigationContainer> */}
       </SafeAreaView>
+
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+  main:{
+    flex:1,
+  }
 });
 
 export default App;
