@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Dimensions } from 'react-native';
 import {Header} from '@react-navigation/stack'
 import Entypo from 'react-native-vector-icons/Entypo'
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 
 // create a component
+const {width} = Dimensions.get('window')
 const Register = ({navigation}) => {
     return (
-        <KeyboardAvoidingView behavior='padding' style={{flex:1}}keyboardVerticalOffset={Header.height} >
+        <KeyboardAvoidingView behavior='padding' style={{flex:1}} >
             <View style={styles.container}>
                 <View style={styles.logTop} >
                     <Text style={styles.logTxt} >LOGIN !</Text>
@@ -55,7 +56,9 @@ const Register = ({navigation}) => {
                         <TouchableOpacity style={styles.loginBtn} >
                             <Text style={{color:'white', fontSize:20, fontWeight:'bold'}} >Register</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{marginTop:20, alignItems:'center',padding:4}} onPress={()=>navigation.navigate('login')} >
+                    </View>
+                    <View style={{position:'absolute', width, bottom:10, flexDirection:'row', justifyContent:'center', alignItems:'center'}} >
+                        <TouchableOpacity style={{alignItems:'center',padding:4}} onPress={()=>navigation.navigate('login')} >
                             <Text style={{fontSize:18, color:'blueviolet'}} >Have an account? Login !!</Text>
                         </TouchableOpacity>
                     </View>
