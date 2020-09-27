@@ -1,11 +1,39 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Dimensions } from 'react-native';
+import AysncStore from '@react-native-community/async-storage'
+import {useSelector, useDispatch} from 'react-redux'
 import {Header} from '@react-navigation/stack'
 import Entypo from 'react-native-vector-icons/Entypo'
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 
+import {headers} from '../../utils'
+
 // create a component
+const { width} = Dimensions.get('window')
 const Login = ({navigation}) => {
+    const [details, setDetails] =useState({
+        email:'',
+        password:''
+    })
+    const dispatch = useDispatch()
+    const handleLogin= async()=>{
+        const form = new FormData()
+        form.append('email', details.email)
+        form.append('password', details.password)
+        try {
+            const data = await fetch("https://tektickets.com/api/user/login", {
+                headers,
+                method:'POST',
+                body:form
+            })
+            const dataText = await data.json()
+            const jsonValue = JSON.stringify(dataText.user)
+            await AysncStore.setItem('user', jsonValue)
+            dispatch({type:'LOGIN', payload:{user:jsonValue, loading:false}})
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <KeyboardAvoidingView behavior='padding' style={{flex:1}}keyboardVerticalOffset={Header.height} >
             <View style={styles.container}>
@@ -23,6 +51,11 @@ const Login = ({navigation}) => {
                                     keyboardType='email-address'
                                     placeholder='Email'
                                     placeholderTextColor='black'
+                                    value={details.email}
+                                    autoCorrect={false}
+                                    autoCapitalize='none'
+                                    returnKeyType='next'
+                                    onChangeText={(text)=>setDetails({...details, email:text})}
                                 />
                             </View>
                         </View>
@@ -36,14 +69,18 @@ const Login = ({navigation}) => {
                                     placeholder='Password'
                                     secureTextEntry={true}
                                     placeholderTextColor='black'
+                                    value={details.password}
+                                    onChangeText={(text)=>setDetails({...details, password:text})}
                                 />
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.loginBtn} >
+                        <TouchableOpacity style={styles.loginBtn} onPress={handleLogin} >
                             <Text style={{color:'white', fontSize:20, fontWeight:'bold'}} >Login</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{marginTop:20, alignItems:'center',padding:4}} onPress={()=>navigation.navigate('register')} >
-                            <Text style={{fontSize:18, color:'blueviolet'}} >Don't have an account? Register !!</Text>
+                    </View>
+                    <View style={{position:'absolute', bottom:10, flexDirection:'row', justifyContent:'center', width}} >
+                        <TouchableOpacity style={{padding:4,}} onPress={()=>navigation.navigate('register')} >
+                                <Text style={{fontSize:18, color:'blueviolet'}} >Don't have an account? Register !!</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -56,7 +93,8 @@ const Login = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'blueviolet'
+        backgroundColor:'blueviolet',
+        position:'relative'
     },
     logTop:{
         flex:1,
