@@ -33,20 +33,21 @@ const dispatch = useDispatch()
    getAuth()
   },[])
 
-  if(loading){
-    return (
-      <View style={{alignItems:'center', justifyContent:'center', flex:1}} >
-          <ActivityIndicator size='large' color='blueviolet'/>
-      </View>
-    )
-  }
+  // if(loading){
+  //   return (
+  //     <View style={{alignItems:'center', justifyContent:'center', flex:1}} >
+  //         <ActivityIndicator size='large' color='blueviolet'/>
+  //     </View>
+  //   )
+  // }
 
   return (
     <>
-        <StatusBar backgroundColor='blueviolet' barStyle='invert' />
+        <StatusBar backgroundColor='#1A4A99' barStyle='invert' />
         <SafeAreaView style={{flex:1}} >
             <NavigationContainer>
-              { user == null ?<AuthStack/> : <RootStack/>}
+              { user == null ?<AuthStack/> : <RootStack
+              />}
           
             </NavigationContainer>
         </SafeAreaView>
