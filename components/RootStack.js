@@ -5,9 +5,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import HomeStack from './stacks/Home'
+import Concert from './Concert'
+import CategoryDetail from './CategoryDetail'
 import TicketStack from './stacks/TicketStack'
 import ProfileStack from './stacks/ProfileStack'
 import NotificationStack from './stacks/NotificationStack'
+import ConcertDetails from './ConcertDetails';
+
+// import { createDrawerNavigator } from '@react-navigation/drawer';
+
 const tabs = createBottomTabNavigator()
 const stack = createStackNavigator()
 
@@ -21,6 +27,12 @@ const homestack = ()=>{
         <stack.Screen name='home' component={HomeStack}
          options={{...options}}
         />
+           <stack.Screen name="concert" component={Concert}
+        />
+         <stack.Screen name="categorydetail" component={CategoryDetail}
+        />
+        <stack.Screen name="concertdetails" component={ConcertDetails} 
+                 options={{...options}}/>
       </stack.Navigator>
     )
   }

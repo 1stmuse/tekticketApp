@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const TicketStack = () => {
     return (
         <View style={styles.container}>
-            <Text> Profile</Text>
+            <Text> Tekticket</Text>
         </View>
     );
 };

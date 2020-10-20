@@ -2,12 +2,15 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import Categories from './Categories'
+import Added from './Added'
 // import Concert from './Concert'
 
 // import FirstSelect from './Details/FirstSelect'
 
 // const {width, height} = Dimensions.get('window')
-const Card = () => {
+const CategoryDetail = ({ }) => {
     const navigation = useNavigation()
      let dimension = Dimensions.get('window');
      let imageHeight =  Math.round((dimension.width *  10) / 20);
@@ -15,17 +18,25 @@ const Card = () => {
      
     return (
         <View style={styles.container} style={{padding: 10,}}>
-
+                  <View style={[styles.row, {marginTop:30, marginLeft:30, borderBottomWidth:0.5}]}>
+                <Ionicons name='search' size={30} color='grey' />
+                <Text style={{fontSize:20, color:'grey', marginLeft:10}} >Search</Text>
+            </View>
+            
+            <View >
+                <Categories/>
+            </View>
             <ScrollView horizontal={true}>
+
                 <TouchableOpacity onPress={()=>navigation.navigate('concert')}>
                 <ImageBackground
                 style={{height: imageHeight, width: imageWidth, borderRadius: 15, margin: 10, width: 300 }}
                 imageStyle={{ borderRadius: 15 }}
-                source= {require("./Images/african.jpg")}
+                source= {require("./Images/comedy.jpg")}
                 >
                         <View style={{position: 'absolute', top: 110, left: 0, right: 0, bottom: 0,}}>
                         <Text style={styles.userStyle}>       
-                        Susan Baker
+                        Dee Mr Joker
                         </Text>
                         <Text style={styles.userStyleSub} numberOfLines={1}>       
                         2 Oct 2020 Accra-Ghana
@@ -36,11 +47,11 @@ const Card = () => {
                  <ImageBackground
                 style={{height: imageHeight, width: imageWidth,  borderRadius: 15, margin: 10, width: 300 }}
                 imageStyle={{ borderRadius: 15 }}
-                source= {require("./Images/guitar.jpg")}
+                source= {require("./Images/trick.jpg")}
                 >
                     <View style={{position: 'absolute', top: 110, left: 0, right: 0, bottom: 0, }}>
                         <Text style={styles.userStyle}>       
-                        Danger Drang
+                       Joker Man
                         </Text>
                         <Text style={styles.userStyleSub} numberOfLines={1}>       
                         12 Oct 2020 Peru-Candu
@@ -50,11 +61,11 @@ const Card = () => {
                   <ImageBackground
                 style={{height: imageHeight, width: imageWidth , borderRadius: 15, margin: 10, width: 300 }}
                 imageStyle={{ borderRadius: 15 }}
-                source= {require("./Images/opera.jpg")}
+                source= {require("./Images/laugh.jpg")}
                 >
                     <View style={{position: 'absolute', top: 110, left: 0, right: 0, bottom: 0, }}>
                         <Text style={styles.userStyle}>       
-                        Rockers
+                        Laugh it Out 
                         </Text>
                         <Text style={styles.userStyleSub} numberOfLines={1}>       
                         14 Oct 2020 Los-Angelos
@@ -64,11 +75,11 @@ const Card = () => {
                  <ImageBackground
                 style={{height: imageHeight, width: imageWidth , borderRadius: 15, margin: 10, width: 300  }}
                 imageStyle={{ borderRadius: 15 }}
-                source= {require("./Images/lead.jpg")}
+                source= {require("./Images/time.jpg")}
                 >
                     <View style={{position: 'absolute', top: 110, left: 0, right: 0, bottom: 0, }}>
                         <Text style={styles.userStyle}>       
-                        Dreamers
+                        Time to Laugh
                         </Text>
                         <Text style={styles.userStyleSub} numberOfLines={1}>       
                         19 Oct 2020 Canada
@@ -78,11 +89,11 @@ const Card = () => {
                   <ImageBackground
                 style={{height: imageHeight, width: imageWidth , borderRadius: 15, margin: 10, width: 300  }}
                 imageStyle={{ borderRadius: 15 }}
-                source= {require("./Images/duba.jpg")}
+                source= {require("./Images/stand.jpg")}
                 >
                     <View style={{position: 'absolute', top: 110, left: 0, right: 0, bottom: 0, }}>
                         <Text style={styles.userStyle}>       
-                        Dready
+                        Stand Up Night
                         </Text>
                         <Text style={styles.userStyleSub} numberOfLines={1}>       
                         20 Oct 2020 Jamaica
@@ -92,11 +103,11 @@ const Card = () => {
                  <ImageBackground
                 style={{height: imageHeight, width: imageWidth , borderRadius: 15, margin: 10, width: 300  }}
                 imageStyle={{ borderRadius: 15 }}
-                source= {require("./Images/african.jpg")}
+                source= {require("./Images/ticket.jpg")}
                 >
                     <View style={{position: 'absolute', top: 110, left: 0, right: 0, bottom: 0, }}>
                         <Text style={styles.userStyle}>       
-                        Tasha Cobbs
+                        Make You Laugh
                         </Text>
                         <Text style={styles.userStyleSub} numberOfLines={1}>       
                         2 Sept 2020 Isreal-Bethlehem
@@ -104,6 +115,18 @@ const Card = () => {
                     </View>
                 </ImageBackground>
             </ScrollView>
+            <View style=  {styles.show}>
+                <View style={{flex: 1}}>
+                <Text style= {{ paddingTop: 15, fontSize: 20, marginLeft: 10, }}>Last added</Text>
+
+                </View>
+                <View style={{flex: 2,}}>
+                <Text style= {{ paddingTop: 15, fontSize: 20,  textAlign: 'right', paddingRight: 15, color: '#00d', fontWeight: "bold"}}>Show all</Text>
+                </View>
+                </View>
+            <View>
+                <Added/>
+            </View>
             {/* <ImageBackground style={{width:width-20, height:height/4}} source={{uri:'https://media1.popsugar-assets.com/files/thumbor/huLkVuxNB9_jiyjJixO4QLxBpiQ/731x0:4187x3456/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/12/14/087/n/1922283/9a5d6fee5df58716248f10.68957960_/i/harry-styles-fine-line-los-angeles-concert-review.jpg'}} >
                 
                 <View>
@@ -146,7 +169,13 @@ const styles = StyleSheet.create({
         paddingLeft: 9
             
     },
+    show:{
+        flexDirection: "row",
+        paddingLeft: 15,
+        fontWeight: 'bold'
+
+    },
 });
 
 //make this component available to the app
-export default Card;
+export default CategoryDetail;
