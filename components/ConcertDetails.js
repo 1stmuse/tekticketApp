@@ -2,6 +2,7 @@ import React from 'react'
 import EventStack from './EventStack'
 import AboutStack from './AboutStack'
 import {View, Text, StyleSheet,Button } from 'react-native'
+import { Fragment } from 'react'
 
 
 
@@ -11,15 +12,16 @@ class ConcertDetails extends React.Component {
     super(props);
     this.state = {
         name: "React",
-        EventStack: "true",
-        AboutStack: "false",
+        OpenEvent: "true",
+        OpenAbout: "false",
         tabName: "event",
+
 
     };
     this.changeComponent = this.changeComponent.bind(this);
   }
   getBtnId = (e) => {
-    if(e.target && e.target.nodeName === " BUTTON") {
+    if(e.target && e.target.nodeName === " Button") {
         this.setState({
             panelIndex: Number(e.target.id)
         });
@@ -28,14 +30,14 @@ class ConcertDetails extends React.Component {
  
         changeComponent(name){
             switch(name) {
-                case "EventStack" : 
+                case "OpenEvent" : 
                 this.setState({
-                  EventStack : !this.state.EventStack
+                  OpenEvent : !this.state.OpenEvent
                 });
                     break;
-                    case "AboutStack" : 
+                    case "OpenAbout" : 
                     this.setState({
-                      AboutStack : !this.state.AboutStack
+                      OpenAbout : !this.state.OpenAbout
                     });
                     break;
                     default : 
@@ -43,34 +45,72 @@ class ConcertDetails extends React.Component {
         }
   render(){
     return ( 
-      <View style={styles.container}>
-        <View style={styles.btnOne}>
+      <>
+      <View >
+        <View style={styles.container}>
         <Button
      onPress={() => this.setState({ tabName: 'event' }) }
-     title="Event">
-       </Button>
-        </View>
-        <View style={styles.btnTwo}>
+     title="Event"
+     color="#0268D6"
+     style={styles.btnOne}
+       />
+        
         <Button
-     onPress={() => this.changeComponent() }
-     title="About">
-       </Button>
+     onPress={() => this.setState({ tabName: 'about' })}
+     title="About"
+     color="#0268D6"
+     style={styles.btnTwo}
+       />
         </View>
+      <View style={{padding: 6}}>
+        <Text>
+           {this.state.tabName === 'event' ? <EventStack /> : ''}
+      </Text>
       </View>
+      <View>
+      <Text>
+         {this.state.tabName === 'about' ? <AboutStack /> : ''}
+      </Text>
+      </View>
+     
+
+      </View>
+      </>
     );
 };
 }
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flexDirection: "row",
+    flex: 1,
+    borderStyle: "solid", 
+    flexGrow: 1,
+    padding: 7,
+    borderRadius: 20,
+    backgroundColor:"white",
+    justifyContent: "center",
+    width: 300,
+    left: 55   
   },
   btnOne : {
-    // flex: 2
+    flex: 1, 
+    width: 100,
+    borderStyle: "solid", 
+    flexGrow: 1,
+    padding: 5,
+    borderRadius: 20,
+    backgroundColor:"white",
+    justifyContent: "center",
+    borderWidth: 50,
+    borderColor: 'black'
+
+
   },
   btnTwo : {
-    // flex: 2
-  },
+    flex: 1,
+    // color: '#000'
+  }
 });
 
 export default ConcertDetails

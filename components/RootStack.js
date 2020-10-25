@@ -11,6 +11,7 @@ import TicketStack from './stacks/TicketStack'
 import ProfileStack from './stacks/ProfileStack'
 import NotificationStack from './stacks/NotificationStack'
 import ConcertDetails from './ConcertDetails';
+import TicketPrice from './TicketPrice'
 
 // import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -33,6 +34,10 @@ const homestack = ()=>{
         />
         <stack.Screen name="concertdetails" component={ConcertDetails} 
                  options={{...options}}/>
+                 
+        <stack.Screen name="ticketprice" component={TicketPrice}
+                  options={{...options}}/>
+
       </stack.Navigator>
     )
   }

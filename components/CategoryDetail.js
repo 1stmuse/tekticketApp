@@ -26,7 +26,11 @@ const CategoryDetail = ({ }) => {
             <View >
                 <Categories/>
             </View>
-            <ScrollView horizontal={true}>
+            <ScrollView
+             horizontal={true}
+             scrollEnabled
+              showsHorizontalScrollIndicator={false}
+              >
 
                 <TouchableOpacity onPress={()=>navigation.navigate('concert')}>
                 <ImageBackground
