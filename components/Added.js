@@ -1,13 +1,13 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground,Image, Platform, ScrollView,} from 'react-native';
+import { View, Text, StyleSheet, ImageBackground,ScrollView,} from 'react-native';
 
 const Card = () => {
     
     return (
         <View style={styles.container} style={{padding: 10,}}>
 
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 <ImageBackground
                 style={styles.images}
                 
