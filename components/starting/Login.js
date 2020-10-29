@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         flex:1,
     },
     logTxt:{
-        fontSize:50,
+        fontSize:20,
         color:'white',
         marginTop:120,
         marginLeft:40
