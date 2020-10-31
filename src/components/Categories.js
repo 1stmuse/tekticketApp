@@ -15,7 +15,7 @@ const Categories = () => {
     const navigation = useNavigation()
 
     return (
-            <ScrollView horizontal style={{marginTop:30, paddingLeft:10}} >
+            <ScrollView horizontal style={{marginTop:10, paddingLeft:10}} showsHorizontalScrollIndicator={false}  >
                 {data.map(({name, key})=>(
                     <TouchableOpacity key={key} onPress={() => {
                         navigation.navigate('categorydetail')
@@ -32,9 +32,8 @@ const Categories = () => {
 
 const styles = StyleSheet.create({
     buttons:{
-   
         flexDirection:'row',
-        backgroundColor:'#1A4A99',
+        backgroundColor:'#9932cc',
         color: 'white',
         elevation:1,
         alignItems:'center',

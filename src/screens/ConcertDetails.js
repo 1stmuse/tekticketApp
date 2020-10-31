@@ -1,6 +1,6 @@
 import React from 'react'
-import EventStack from './EventStack'
-import AboutStack from './AboutStack'
+import EventStack from '../EventStack'
+import AboutStack from '../AboutStack'
 import {View, Text, StyleSheet,Button } from 'react-native'
 import { Fragment } from 'react'
 
@@ -28,53 +28,53 @@ class ConcertDetails extends React.Component {
     }
 }
  
-        changeComponent(name){
-            switch(name) {
-                case "OpenEvent" : 
-                this.setState({
-                  OpenEvent : !this.state.OpenEvent
-                });
-                    break;
-                    case "OpenAbout" : 
-                    this.setState({
-                      OpenAbout : !this.state.OpenAbout
-                    });
-                    break;
-                    default : 
-            }
-        }
+  changeComponent(name) {
+    switch (name) {
+      case "OpenEvent":
+        this.setState({
+          OpenEvent: !this.state.OpenEvent
+        });
+        break;
+      case "OpenAbout":
+        this.setState({
+          OpenAbout: !this.state.OpenAbout
+        });
+        break;
+      default:
+    }
+  }
   render(){
     return ( 
       <>
-      <View >
-        <View style={styles.container}>
-        <Button
-     onPress={() => this.setState({ tabName: 'event' }) }
-     title="Event"
-     color="#0268D6"
-     style={styles.btnOne}
-       />
-        
-        <Button
-     onPress={() => this.setState({ tabName: 'about' })}
-     title="About"
-     color="#0268D6"
-     style={styles.btnTwo}
-       />
-        </View>
-      <View style={{padding: 6}}>
-        <Text>
-           {this.state.tabName === 'event' ? <EventStack /> : ''}
-      </Text>
-      </View>
-      <View>
-      <Text>
-         {this.state.tabName === 'about' ? <AboutStack /> : ''}
-      </Text>
-      </View>
-     
+        <View >
+          <View style={styles.container}>
+            <Button
+              onPress={() => this.setState({ tabName: 'event' })}
+              title="Event"
+              color="#0268D6"
+              style={styles.btnOne}
+            />
 
-      </View>
+            <Button
+              onPress={() => this.setState({ tabName: 'about' })}
+              title="About"
+              color="#0268D6"
+              style={styles.btnTwo}
+            />
+          </View>
+          <View style={{ padding: 6 }}>
+            <Text>
+              {this.state.tabName === 'event' ? <EventStack /> : ''}
+            </Text>
+          </View>
+          <View>
+            <Text>
+              {this.state.tabName === 'about' ? <AboutStack /> : ''}
+            </Text>
+          </View>
+
+
+        </View>
       </>
     );
 };

@@ -21,17 +21,21 @@ const Login = ({navigation}) => {
         form.append('email', details.email)
         form.append('password', details.password)
         try {
-            const data = await fetch("https://tektickets.com/api/user/login", {
+            const response= await fetch("https://tektickets.com/api/user/login", {
                 headers,
                 method:'POST',
                 body:form
             })
-            const dataText = await data.json()
-            const jsonValue = JSON.stringify(dataText.user)
-            await AysncStore.setItem('user', jsonValue)
-            dispatch({type:'LOGIN', payload:{user:jsonValue, loading:false}})
+            const data = await response.json()
+            if(data.user){
+                const user = JSON.stringify(data.user)
+                await AysncStore.setItem('user', user)
+                dispatch({type:'LOGIN', payload:{user, loading:false}})
+            }else{
+                alert('error')
+            }
         } catch (error) {
-            console.log(error)
+            console.log('error', error)
         }
     }
     return (
@@ -54,6 +58,7 @@ const Login = ({navigation}) => {
                                     value={details.email}
                                     autoCorrect={false}
                                     autoCapitalize='none'
+                                    autoCompleteType ='off'
                                     returnKeyType='next'
                                     onChangeText={(text)=>setDetails({...details, email:text})}
                                 />

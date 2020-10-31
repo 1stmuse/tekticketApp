@@ -7,8 +7,8 @@ import {userReducer} from './reducer'
 import {createStore} from 'redux'
 import {useSelector, Provider, useDispatch} from 'react-redux'
 
-import RootStack from './components/RootStack'
-import AuthStack from './components/AuthStack'
+import RootStack from './src/RootStack'
+import AuthStack from './src/AuthStack'
 const store = createStore(userReducer)
 
 const App= () =>  {
@@ -18,9 +18,9 @@ const dispatch = useDispatch()
 
   const getAuth = async()=>{
     try {
-      const item = await AysncStore.getItem('user')
-      if(item !==null){
-        const jsonUser = JSON.parse(item)
+      const userData = await AysncStore.getItem('user')
+      const jsonUser = JSON.parse(userData)
+      if(userData !==null){
         dispatch({type:'LOGIN', payload:{user:jsonUser, loading:false}})
       }else{
         dispatch({type:'LOGIN', payload:{user:jsonUser, loading:false}})
@@ -29,17 +29,18 @@ const dispatch = useDispatch()
       console.log(error)
     }
   }
+
   useEffect(()=>{
    getAuth()
   },[])
 
-  // if(loading){
-  //   return (
-  //     <View style={{alignItems:'center', justifyContent:'center', flex:1}} >
-  //         <ActivityIndicator size='large' color='blueviolet'/>
-  //     </View>
-  //   )
-  // }
+  if(loading){
+    return (
+      <View style={{alignItems:'center', justifyContent:'center', flex:1}} >
+          <ActivityIndicator size='large' color='blueviolet'/>
+      </View>
+    )
+  }
 
   return (
     <>
@@ -48,7 +49,6 @@ const dispatch = useDispatch()
             <NavigationContainer>
               { user == null ?<AuthStack/> : <RootStack
               />}
-          
             </NavigationContainer>
         </SafeAreaView>
 

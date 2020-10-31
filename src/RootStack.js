@@ -1,22 +1,24 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
-import HomeStack from './stacks/Home'
-import Concert from './Concert'
-import CategoryDetail from './CategoryDetail'
-import TicketStack from './stacks/TicketStack'
-import ProfileStack from './stacks/ProfileStack'
-import NotificationStack from './stacks/NotificationStack'
-import ConcertDetails from './ConcertDetails';
-import TicketPrice from './TicketPrice'
+import HomeStack from './rootStacksScreens/Home'
+import Concert from './components/Concert'
+import CategoryDetail from './screens/CategoryDetail'
+import TicketStack from './rootStacksScreens/TicketStack'
+import ProfileStack from './rootStacksScreens/ProfileStack'
+import NotificationStack from './rootStacksScreens/NotificationStack'
+import ConcertDetails from './screens/ConcertDetails';
+import CustomDrawer from './components/CustomDrawer'
 
 // import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const tabs = createBottomTabNavigator()
 const stack = createStackNavigator()
+const drawer = createDrawerNavigator()
 
 const options = {
   headerShown:false
@@ -26,18 +28,13 @@ const homestack = ()=>{
     return(
       <stack.Navigator>
         <stack.Screen name='home' component={HomeStack}
-         options={{...options}}
+          options={{ ...options }}
         />
-           <stack.Screen name="concert" component={Concert}
+        <stack.Screen name="concert" component={Concert}
         />
-         <stack.Screen name="categorydetail" component={CategoryDetail}
+        <stack.Screen name="categorydetail" component={CategoryDetail}
         />
-        <stack.Screen name="concertdetails" component={ConcertDetails} 
-                 options={{...options}}/>
-                 
-        <stack.Screen name="ticketprice" component={TicketPrice}
-                  options={{...options}}/>
-
+        <stack.Screen name="concertdetails" component={ConcertDetails} options={{ ...options }} />
       </stack.Navigator>
     )
   }
@@ -71,12 +68,12 @@ const homestack = ()=>{
   }
 
 // create a component
-const RootStack = () => {
+const drawerRoot = () => {
     return (
         <tabs.Navigator
         tabBarOptions={{
-          activeTintColor: '#1A4A99',
-          inactiveTintColor: 'grey',
+          activeTintColor: '#9932cc',
+          inactiveTintColor: '#483d8b',
           tabStyle:{backgroundColor:'transparent'},
           style:{height:60, paddingVertical:5, elevation:0, backgroundColor:'none'},
           labelStyle:{
@@ -120,6 +117,14 @@ const RootStack = () => {
       </tabs.Navigator>
     );
 };
+
+const RootStack =()=>{
+  return(
+  <drawer.Navigator drawerContent={props => <CustomDrawer {...props} /> }>
+        <drawer.Screen name="Home" component={drawerRoot} />
+    </drawer.Navigator>
+  )
+}
 
 //make this component available to the app
 export default RootStack;
