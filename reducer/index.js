@@ -16,7 +16,7 @@ export const userReducer = (state=initialState, action)=>{
             return{
                 ...state,
                 loading:action.payload.loading,
-                user:null
+                user:action.payload.user
             }
         default:
             return state

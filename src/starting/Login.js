@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Dimensions } from 'react-native';
-import AysncStore from '@react-native-community/async-storage'
+import AsyncStore from '@react-native-community/async-storage'
 import {useSelector, useDispatch} from 'react-redux'
 import {Header} from '@react-navigation/stack'
 import Entypo from 'react-native-vector-icons/Entypo'
@@ -29,7 +29,7 @@ const Login = ({navigation}) => {
             const data = await response.json()
             if(data.user){
                 const user = JSON.stringify(data.user)
-                await AysncStore.setItem('user', user)
+                await AsyncStore.setItem('user', user)
                 dispatch({type:'LOGIN', payload:{user, loading:false}})
             }else{
                 alert('error')
