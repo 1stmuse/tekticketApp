@@ -33,7 +33,7 @@ const Categories = () => {
 const styles = StyleSheet.create({
     buttons:{
         flexDirection:'row',
-        backgroundColor:'#9932cc',
+        backgroundColor:'#00d',
         color: 'white',
         elevation:1,
         alignItems:'center',

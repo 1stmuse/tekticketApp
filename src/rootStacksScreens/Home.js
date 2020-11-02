@@ -1,52 +1,25 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView,ImageBackground, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Dimensions, StatusBar,TextInput, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Categories from '../components/Categories'
 import PopularConcerts from '../components/PopularConcerts'
 import Added from '../components/Added'
-import Swiper from 'react-native-swiper'
-
-const swiperImages=[
-    require('../Images/african.jpg'),
-    require('../Images/opera.jpg'),
-    require('../Images/laugh.jpg'),
-    require('../Images/guitar.jpg'),
-]
+const {width, height} = Dimensions.get('window')
 
 const Home = (navigation) => {
-    const {width, height} = Dimensions.get('window')
+
     return (
-        // <ScrollView>
+        <ScrollView>
             <View style={styles.container}>
-                <StatusBar translucent backgroundColor='transparent' />
-                <View style={styles.sliderContainer}>
-                    <Swiper autoplay horizontal={true} actveDotColor="#1A4A99">
-                       {swiperImages.map((image,index)=>(
-                            <View style={styles.slide} key={index} >
-                                <ImageBackground
-                                    resizeMode="center"
-                                    style={styles.SliderImage}
-                                    style={{ height: '100%',width: width, borderRadius: 15, }}
-                                    source={image}
-                                    resizeMode="cover">
-                                    <View style={{ position: 'absolute', top: '50%', width, alignItems:'center' }}>
-                                        <Text style={[styles.swiperTxt,]}>
-                                            Dee Mr Joker
-                                        </Text>
-                                        <Text style={styles.swiperTxt} numberOfLines={1}>
-                                            2 Oct 2020 Accra-Ghana
-                                        </Text>
-                                    </View>
-                                </ImageBackground>
-                            </View>
-                       ))}
-                    </Swiper>
-                </View>
+                {/* <StatusBar translucent backgroundColor='transparent' /> */}
                 <View style={[styles.search,]}>
-                    <TouchableOpacity>
-                        <Ionicons name='search' size={28} color='white' />
-                    </TouchableOpacity>
+                    <View style={styles.searchIcon} >
+                        <Ionicons name='search' size={28} color='grey' />
+                    </View>
+                    <View >
+                        <TextInput placeholder='search for your events' style={styles.searchInput}  />       
+                    </View>
                 </View>
                 <ScrollView>
                     <View >
@@ -70,14 +43,14 @@ const Home = (navigation) => {
                     </View>
                 </ScrollView>
             </View>
-        // </ScrollView>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'white'
+        // backgroundColor:'white'
     },
     Popular: {
         paddingTop: 15,
@@ -93,9 +66,21 @@ const styles = StyleSheet.create({
     },     
 
     search:{
+        flexDirection:'row',
+        paddingLeft:20,
+        marginTop:50
+    },
+    searchInput:{
+        borderBottomWidth:1,
+        width: width * 0.8,
+        fontSize:20,
+        paddingBottom:0,
+        paddingLeft:40
+    },
+    searchIcon:{
         position:'absolute',
-        right:10,
-        top:40,
+        top:10,
+        left:25
     },
     sliderContainer: {
         height: 240,

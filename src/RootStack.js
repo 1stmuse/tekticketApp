@@ -72,8 +72,8 @@ const drawerRoot = () => {
     return (
         <tabs.Navigator
         tabBarOptions={{
-          activeTintColor: '#9932cc',
-          inactiveTintColor: '#483d8b',
+          activeTintColor: '#00d',
+          inactiveTintColor: 'grey',
           tabStyle:{backgroundColor:'transparent'},
           style:{height:60, paddingVertical:5, elevation:0, backgroundColor:'none'},
           labelStyle:{

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Dimensions, StatusBar } from 'react-native';
 import AsyncStore from '@react-native-community/async-storage'
-import {useSelector, useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {Header} from '@react-navigation/stack'
 import Entypo from 'react-native-vector-icons/Entypo'
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
@@ -40,6 +40,7 @@ const Login = ({navigation}) => {
     }
     return (
         <KeyboardAvoidingView behavior='padding' style={{flex:1}}keyboardVerticalOffset={Header.height} >
+            <StatusBar translucent backgroundColor='transparent'/>
             <View style={styles.container}>
                 <View style={styles.logTop} >
                     <Text style={styles.logTxt} >LOGIN !</Text>

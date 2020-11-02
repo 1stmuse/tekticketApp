@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 import {SafeAreaView,StyleSheet,StatusBar,View, ActivityIndicator} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native'
+import { Provider as PaperProvider} from 'react-native-paper';
 import AysncStore from '@react-native-community/async-storage'
 import {userReducer} from './reducer'
 import {createStore} from 'redux'
@@ -20,10 +21,10 @@ const dispatch = useDispatch()
     try {
       const userData = await AysncStore.getItem('user')
       const jsonUser = JSON.parse(userData)
-      if(userData !==null){
+      if(jsonUser!==null){
         dispatch({type:'LOGIN', payload:{user:jsonUser, loading:false}})
       }else{
-        dispatch({type:'LOGIN', payload:{user:jsonUser, loading:false}})
+        dispatch({type:'LOGIN', payload:{user:null, loading:false}})
       }
     } catch (error) {
       console.log(error)
@@ -32,7 +33,7 @@ const dispatch = useDispatch()
 
   useEffect(()=>{
    getAuth()
-  },[])
+  },[user])
 
   if(loading){
     return (
@@ -58,9 +59,12 @@ const dispatch = useDispatch()
 const Main =()=>{
 
   return(
-    <Provider store={store} >
-      <App/>
-    </Provider>
+    <PaperProvider>
+        <Provider store={store} >
+          <App/>
+      </Provider>
+    </PaperProvider>
+
   )
 }
 
