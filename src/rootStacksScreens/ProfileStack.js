@@ -9,7 +9,7 @@ const ProfileStack = () => {
     const [location, setLocation] = useState(false)
     return (
         <View style={styles.container}>
-            <StatusBar translucent backgroundColor='transparent'/>
+            <StatusBar barStyle='light-content' translucent backgroundColor='transparent'/>
             <View style={styles.profileHeader}>
                 <View style={{marginTop:60}}>
                     <Text style={{fontSize:25, color:'white',fontWeight:'bold'}}>Account</Text>
@@ -35,8 +35,16 @@ const ProfileStack = () => {
                         <Switch value={location} onValueChange={()=>setLocation(!location)}/>
                     </View>
                     <View style={styles.location}>
-                        <Text style={{fontSize:18, color:'grey'}}>Use my Current Location</Text>
-                        <IonIcon name='arrow-forward' size={30} color='grey'/>
+                        <Text style={{fontSize:18, color:'grey'}}>Tickets Purchased</Text>
+                        <IonIcon name='arrow-forward' size={25} color='grey'/>
+                    </View>
+                    <View style={styles.location}>
+                        <Text style={{fontSize:18, color:'grey'}}>Tickets Purchased</Text>
+                        <IonIcon name='arrow-forward' size={25} color='grey'/>
+                    </View>
+                    <View style={styles.location}>
+                        <Text style={{fontSize:18, color:'grey'}}>Tickets Purchased</Text>
+                        <IonIcon name='arrow-forward' size={25} color='grey'/>
                     </View>
                 </View>
             </View>
@@ -47,11 +55,11 @@ const ProfileStack = () => {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     profileHeader:{
         height:120,
-        backgroundColor:'#00d',
+        backgroundColor:'royalblue',
         justifyContent:'center',
         alignItems:'center'
     },

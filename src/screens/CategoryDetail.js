@@ -1,21 +1,40 @@
 //import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-// import Concert from './Concert'
+import React, { Component, useState } from 'react';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView,StatusBar, Dimensions } from 'react-native';
+import Card from '../components/Card'
 
 // import FirstSelect from './Details/FirstSelect'
 
 // const {width, height} = Dimensions.get('window')
-const CategoryDetail = ({ }) => {
-    const navigation = useNavigation()
-     let dimension = Dimensions.get('window');
-     let imageHeight =  Math.round((dimension.width *  10) / 20);
-     let imageWidth = dimension.width;
+const CategoryDetail = ({ navigation, route}) => {
+    let dimension = Dimensions.get('window');
+    let imageHeight =  Math.round((dimension.width *  10) / 20);
+    let imageWidth = dimension.width; 
+    const {categories} = route.params.categories
+    const [selectedId, setSelectedId]= useState(categories[0].id)
+    
+    const categoryPress =(id)=>{
+        setSelectedId(id)
+    }
      
     return (
-        <View style={styles.container} style={{padding: 10,}}>
-            <ScrollView
+        <View style={styles.container} style={{padding: 10}}>
+        {/* <StatusBar translucent backgroundColor='royalblue' /> */}
+            <View>
+                <View><Text style={{fontSize:22, fontWeight:'bold', color:'#a9a9a9'}}>Categories</Text></View>
+                <View style={styles.categoryContainer}>
+                    {categories.map(category=>(
+                        <TouchableOpacity key={category.id}
+                            onPress={()=>categoryPress(category.id)}
+                            style={[styles.categoryText, {backgroundColor:category.id == selectedId ? 'royalblue' : '#a9a9a9'}]}>
+                            <View>
+                                <Text style={{color:'white'}}>{category.name} </Text>
+                            </View>
+                        </TouchableOpacity>
+                    ))}
+                </View>
+            </View>
+            {/* <ScrollView
              horizontal={true}
              scrollEnabled
               showsHorizontalScrollIndicator={false}
@@ -36,7 +55,7 @@ const CategoryDetail = ({ }) => {
                         </View>
                     </ImageBackground>
                 </TouchableOpacity>
-            </ScrollView>
+            </ScrollView> */}
         </View>
     );
 };
@@ -47,7 +66,17 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent:'flex-end',
-        // height: height/4,
+    },
+    categoryContainer:{
+        flexDirection:'row',
+        flexWrap:'wrap'
+    },
+    categoryText:{
+        minWidth:100,
+        borderRadius:10,
+        alignItems:'center',
+        margin:5,
+        padding:10
     },
     cardTxt:{
         fontSize:25,

@@ -4,25 +4,25 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
 
-const data = [
-    {key:'1', name:'Music'},
-    {key:'2', name:'Comedy' },
-    {key:'3', name:'Sport'},
-    {key:'4', name:'Art'},
-    {key:'5', name:'Movies'}
-]
-const Categories = () => {
+// const data = [
+//     {key:'1', name:'Music'},
+//     {key:'2', name:'Comedy' },
+//     {key:'3', name:'Sport'},
+//     {key:'4', name:'Art'},
+//     {key:'5', name:'Movies'}
+// ]
+const Categories = ({menus}) => {
     const navigation = useNavigation()
 
     return (
             <ScrollView horizontal style={{marginTop:10, paddingLeft:10}} showsHorizontalScrollIndicator={false}  >
-                {data.map(({name, key})=>(
-                    <TouchableOpacity key={key} onPress={() => {
-                        navigation.navigate('categorydetail')
+                {menus.length && menus.map((menu)=>(
+                    <TouchableOpacity key={menu.id} onPress={() => {
+                        navigation.navigate('Events', {categories:menu, headerTitle:menu.name})
                     } }> 
                         <View style={styles.buttons} >
-                            <Ionicons name='home' size={25} />
-                            <Text style={{marginLeft:5, fontSize:15}} style={styles.colorList} >{name} </Text>
+                            <Ionicons name='home' size={25} color='white' />
+                            <Text style={{marginLeft:5, fontSize:15}} style={styles.colorList} >{menu.name} </Text>
                         </View>
                     </TouchableOpacity>
                 ))}
@@ -40,8 +40,10 @@ const styles = StyleSheet.create({
         justifyContent:'space-around',
         elevation:1,
         borderColor:'grey',
-        width:100,
+        minWidth:100,
+        // width:130,
         padding:10,
+        // paddingHorizontal:20,
         marginRight:10,
         borderRadius:10
     },

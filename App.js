@@ -4,18 +4,19 @@ import {SafeAreaView,StyleSheet,StatusBar,View, ActivityIndicator} from 'react-n
 import {NavigationContainer} from '@react-navigation/native'
 import { Provider as PaperProvider} from 'react-native-paper';
 import AysncStore from '@react-native-community/async-storage'
-import {userReducer} from './reducer'
+import combinedReducer from './reducer/combineRed'
 import {createStore} from 'redux'
 import {useSelector, Provider, useDispatch} from 'react-redux'
 
 import RootStack from './src/RootStack'
 import AuthStack from './src/AuthStack'
-const store = createStore(userReducer)
+import {menuRoute} from './utils'
+const store = createStore(combinedReducer)
 
 const App= () =>  {
 
-const {user, loading} = useSelector(state=> state)
-const dispatch = useDispatch()
+  const {user, loading} = useSelector(state=> state.user)
+  const dispatch = useDispatch()
 
   const getAuth = async()=>{
     try {

@@ -1,18 +1,43 @@
 //import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Dimensions, StatusBar,TextInput, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, Dimensions, StatusBar,TextInput, ActivityIndicator} from 'react-native';
+import {useDispatch,useSelector} from 'react-redux'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Categories from '../components/Categories'
 import PopularConcerts from '../components/PopularConcerts'
 import Added from '../components/Added'
+import {menuRoute} from '../../utils'
 const {width, height} = Dimensions.get('window')
 
 const Home = (navigation) => {
+    const {menus,load} = useSelector(state => state.menus)
+    const dispatch = useDispatch()
+    console.log(menus)
 
+    const getMenus = async()=>{
+        try {
+            const data = await menuRoute()
+            dispatch({type:'GET_MENU', payload:{menus:data.menus, load:false}})
+        } catch (error) {
+            alert(error)
+        }
+    }
+
+    useEffect(()=>{
+        getMenus()
+    }, [])
+
+  if(load){
+    return (
+      <View style={{alignItems:'center', justifyContent:'center', flex:1}} >
+          <ActivityIndicator size='large' color='blueviolet'/>
+      </View>
+    )
+  }
     return (
         <ScrollView>
             <View style={styles.container}>
-                {/* <StatusBar translucent backgroundColor='transparent' /> */}
+                <StatusBar barStyle='dark-content' backgroundColor='transparent' />
                 <View style={[styles.search,]}>
                     <View style={styles.searchIcon} >
                         <Ionicons name='search' size={28} color='grey' />
@@ -23,7 +48,7 @@ const Home = (navigation) => {
                 </View>
                 <ScrollView>
                     <View >
-                        <Categories />
+                        {menus.length && <Categories menus={menus} /> }
                     </View>
                     <View style={{ flex: 1 }}>
                         <Text style={styles.Popular}>Popular Concerts</Text>

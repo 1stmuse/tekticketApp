@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack'
+import {createStackNavigator, HeaderTitle} from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -26,13 +26,16 @@ const options = {
 
 const homestack = ()=>{
     return(
-      <stack.Navigator>
+      <stack.Navigator initialRouteName='home'>
         <stack.Screen name='home' component={HomeStack}
           options={{ ...options }}
         />
         <stack.Screen name="concert" component={Concert}
         />
-        <stack.Screen name="categorydetail" component={CategoryDetail}
+        <stack.Screen name="Events" component={CategoryDetail}
+          options={({route})=>({
+            title:route.params.headerTitle
+          })}
         />
         <stack.Screen name="concertdetails" component={ConcertDetails} options={{ ...options }} />
       </stack.Navigator>
@@ -71,6 +74,7 @@ const homestack = ()=>{
 const drawerRoot = () => {
     return (
         <tabs.Navigator
+        initialRouteName='home'
         tabBarOptions={{
           activeTintColor: '#00d',
           inactiveTintColor: 'grey',
@@ -82,7 +86,7 @@ const drawerRoot = () => {
           }
         }}
       >
-        <tabs.Screen name='homeTab' children={homestack}
+        <tabs.Screen name='home' children={homestack}
           options={{
             tabBarLabel:'Home',
             tabBarIcon:({color, size})=>(
